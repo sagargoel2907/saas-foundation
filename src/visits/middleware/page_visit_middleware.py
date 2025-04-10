@@ -12,8 +12,8 @@ class PageVisitMiddleware:
 
     def __call__(self, request):
         start_time = time.time()
-        PageVisit.objects.create(path=request.path)
         response = self.get_response(request)
         duration = time.time()-start_time
         print(f'Request processed in {duration:.4f} seconds')
+        PageVisit.objects.create(path=request.path)
         return response
