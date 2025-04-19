@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG') == '1'
 
-ALLOWED_HOSTS = ['.railway.app', 'saas-foundation-dev.ap-south-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['.railway.app', 'saas-foundation-dev.ap-south-1.elasticbeanstalk.com', '127.0.0.1']
 
 if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # myapps
     'visits',
+    'commando',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +97,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-print(DATABASES)
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -138,6 +139,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_BASE_DIR=BASE_DIR / 'staticfiles'
+STATICFILES_VENDOR_DIR=STATICFILES_BASE_DIR / 'vendors'
+
+# source for python manage.py collectstatic
+STATICFILES_DIRS = [
+    STATICFILES_BASE_DIR,
+]
+
+# output for python manage.py collectstatic
+STATIC_ROOT = BASE_DIR / 'local-cdn'
+if DEBUG:
+    STATIC_ROOT = BASE_DIR.parent / 'local-cdn'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

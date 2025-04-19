@@ -176,3 +176,9 @@ cython_debug/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# ignore staticfiles
+src/staticfiles/vendors
+
+# ignore static root
+local-cdn/
