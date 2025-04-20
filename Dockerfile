@@ -43,6 +43,9 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
+ENV DJANGO_SECRET_KEY='abc'
+ENV DJANGO_DEBUG=1
+
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
