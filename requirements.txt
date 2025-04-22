@@ -4,3 +4,4 @@ pillow
 dotenv
 psycopg[binary,pool]
 requests
+whitenoise
