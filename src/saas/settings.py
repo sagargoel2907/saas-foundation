@@ -20,6 +20,22 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# email config
+EMAIL_HOST = os.getenv('EMAIL_HOST') or "smtp.gmail.com"
+EMAIL_PORT = os.getenv('EMAIL_PORT') or 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL') == 'True'
+ADMIN_USER_NAME = os.getenv('ADMIN_USER_NAME') or 'Admin user'
+ADMIN_USER_EMAIL = os.getenv('ADMIN_USER_EMAIL')
+
+ADMINS = []
+MANAGERS = []
+if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+    ADMINS.append((f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}'))
+    MANAGERS = ADMINS
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
