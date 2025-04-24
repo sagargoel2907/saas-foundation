@@ -66,6 +66,9 @@ INSTALLED_APPS = [
     # myapps
     'visits',
     'commando',
+    # third party apps
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +80,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # third party middlewares
+    'allauth.account.middleware.AccountMiddleware',
     # my middlewares
     # 'visits.middleware.page_visit_middleware.PageVisitMiddleware',
 ]
@@ -142,6 +147,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+LOGIN_REDIRECT_URL = '/'
 
 
 # Internationalization

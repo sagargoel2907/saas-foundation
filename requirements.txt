@@ -5,3 +5,4 @@ dotenv
 psycopg[binary,pool]
 requests
 whitenoise
+django-allauth[socialaccount]
