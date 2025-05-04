@@ -8,6 +8,13 @@
 </head>
 <body>
     {% include 'nav/navbar.html' %}
+    {% if messages %}
+                <div>
+                    <ul>
+                        {% for message in messages %}<li class="bg-blue-700 border-gray-100 p-2 mb-2 text-white">{{ message }}</li>{% endfor %}
+                    </ul>
+                </div>
+    {% endif %}
     {% block content %}{% endblock content %}
     {% include 'base/js.html' %}
 </body>
